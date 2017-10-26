@@ -1,0 +1,60 @@
+class Corrupt:
+	def __init__(self, name, salary, stolen, haircut, expensive_watch):
+		self.name = name
+		self.salary = salary
+		self.haircut = haircut
+		self.stolen = stolen
+		self.expensive_watch = expensive_watch
+
+	def talk(self):
+		print(self.name + " почесав свою " + self.haircut +\
+		"\nПосмотрев время на своих "  + self.expensive_watch + ''' сказал:
+'Ну мм понимаете в нашей стране наступили тяжелый времена.
+Денег нет но вы держитесь там хорошего дня вам настроения всего доброго' ''' +
+		"\nЗатем посмотрел на свой оффициальный месячный доход размером " + self.salary + 
+		"\nКоторый его неустроил решил своровать еще немножечко всего лишь " + self.stolen +
+		"\nНу так в ресторане с женой пообедать ну вы же понимаете")
+
+def discussion(person):
+	person.talk()
+
+medved = Corrupt("Медведев", "1000000р", "50000000р", "каштановую прическу дракулы", "Joaillene Manchette")
+discussion(medved)
+input()
+
+class Anticorrupt:
+	def __init__(self, name, slogan):
+		self.name = name
+		self.slogan = slogan
+
+	def talk(self):
+		print("А " + self.name + " ответил как же все меня '№*#*?&%№'\nИ вот эти люди правят нашей страной! "
+			+ "\n" + self.slogan)
+
+def discussion(person):
+	person.talk()
+
+kamikadze = Anticorrupt("Нэвэльный", "Россия наша страна!!")
+discussion(kamikadze)
+input()
+
+class Vata:
+	def __init__(self, name, place_residence, salary, slogan):
+		self.name = name
+		self.place_residence = place_residence
+		self.salary = salary
+		self.slogan = slogan
+
+	def talk(self):
+		print("А тем временем какая-то СтароВата по имени " +
+		self.name + "\nЖивущая в " + self.place_residence
+		+ " на жалкие " + self.salary  +
+		"\nП*&@#т что :" + self.slogan)	
+
+def discussion(person):
+	person.talk()
+
+starovata = Vata("Марья Ивановна", "заж***ии", "7000р", "Путин властелин мира")
+discussion(starovata)
+input()
+
