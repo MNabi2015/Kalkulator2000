@@ -1,0 +1,48 @@
+from random import randint
+
+class Safe_box:
+	def __init__(self, password, money, protect, number, currency):
+		self.money = money
+		self.protect = protect
+		self.password = password
+		self.number = number
+		self.currency = currency
+
+	@property
+	def safebox_info(self):
+		return "Сейф находится в ячейке " + self.number + "\nБаланс: " + self.money + self.currency +"\nПароль: " + self.password + "\nУровень безопастности: " + self.protect
+
+	@safebox_info.setter
+	def safebox_info(self, secret_password, secret_money):
+		self.money = "\nБаланс: " + secret_money
+		self.password = "\nПароль: " + secret_password
+
+
+
+Number1 = randint(10000, 10000000)
+secret_box = Safe_box("*******", "неизвестно", "неизвестно", str(Number1), " влюта тоже неизвестна")
+print(">>>Вы пытаетесь узнать информацию о чужом сейфе<<<")
+print(secret_box.safebox_info)
+print("\n")
+
+question = input("Хотите завести свой cейф у нас д\н: ")
+if question == "д":
+	password = int(input("Введите пароль(только цифры): "))
+	if password <= 100:
+		protect = "очень низкий"
+	elif 100 < password <= 100000:
+		protect = "низкий"
+	elif 100000 < password <= 10000000:
+		protect = "средний"
+	elif 10000000 < password <= 1000000000:
+		protect = "высокий"
+	elif password > 1000000000:
+		protect = "очень высокий"
+	money = int(input("Введите ваш баланс: "))
+	currency = input("Ваша валюта: ")
+	number = randint(10000, 10000000)
+	your_box = Safe_box(str(password), str(money), str(protect), str(number), str(currency))
+	print("\n")
+	print(your_box.safebox_info)
+else:
+	print("Так я вызываю копов!!")
