@@ -1,0 +1,195 @@
+from random import randint, choice
+
+class Heroes:
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		self.oll = oll
+		self.expen = expen
+		self.health = health
+		self.power = power
+		self.nickname = nickname
+		self.weapons = weapons
+
+class Knight(Heroes):
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		super().__init__(power, health, weapons, expen, oll, nickname)
+	def attack1(self, target):
+		target.health -= (self.power + self.weapons)
+		self.oll -= self.expen
+		print(self.nickname, "ударил мечом по противнику с силой",\
+		(self.power + self.weapons))
+	def attack2(self, target):
+		target.health -= self.power
+		print(self.nickname, "ударил рукой соперника с силой", self.power)
+	def death(self):
+		print("Нееет...!!Я же забыл утюг выключить!!")
+
+class Ninja(Heroes):
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		super().__init__(power, health, weapons, expen, oll, nickname)
+	def attack1(self, target):
+		target.health -= (self.weapons * self.expen)
+		self.oll -= self.expen
+		print(self.nickname, "кинул в противника сюрикен и отнял",\
+		(self.weapons * self.expen), "урона")	
+	def attack2(self, target):
+		target.health -= (self.power + self.weapons)
+		print(self.nickname, "ударил катаной по противнику и нанес",\
+		(self.power + self.weapons), "урона")
+	def death(self):
+		print("没有...", self.nickname, "Совершил хара-кири")
+
+class Archer(Heroes):
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		super().__init__(power, health, weapons, expen, oll, nickname)
+	def attack1(self, target):
+		target.health -= ((self.weapons * self.expen) + self.power)
+		self.oll -= self.expen
+		print(self.nickname, "выстрелил из лука огненной стрелой и нанес",\
+		((self.weapons * self.expen) + self.power), "урона")
+	def attack2(self, target):
+		target.health -= self.weapons
+		print(self.nickname, "выстрелил из лука обычной стрелой и нанес",\
+		(self.weapons ), "урона")
+	def death(self):
+		print("Нееет...!!")
+
+class Wizard(Heroes):
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		super().__init__(power, health, weapons, expen, oll, nickname)
+	def attack1(self, target):
+		target.health -= (self.power + self.weapons)
+		self.oll -= (self.expen // 2)
+		print(self.nickname + " своим 'FeereeBaall!!!' нанес", (self.weapons + self.power), "урона",
+		"и потратил", (self.expen // 2), "манны")
+	def attack2(self, target):
+		target.health -= self.weapons
+		print(self.nickname + " призносит заклинание: 'Какашка судьбы!!' и наносит", self.weapons, "урона")	
+	def death(self):
+		print("Нееет...!!Ой всмысле Да! Маги не умерают!!")
+
+def game():
+	print(">>>Создание персонажа<<<")
+	print("player1:")
+	klass = input('''К какому классу относится наш персонаж:
+1)Рыцарь
+2)Ниндзя
+3)Лучник
+4)Чародей
+''')
+	if klass == "1":
+		Name = input("Как будут величать нашего персонажа?:")
+		Power = randint(50, 200)
+		Weapons = randint(10, 100)
+		Expen = randint(10, 20)
+		Oll = randint(30, 60)
+		Health = randint(700, 1100)
+		player1 = Knight(Power, Health, Weapons, Expen, Oll, Name)
+	elif klass == "2":
+		Name = input("Как будут величать нашего персонажа?:")
+		Power = randint(70, 220)
+		Weapons = randint(30, 120)
+		Expen = randint(1, 3)
+		Oll = randint(3, 9)
+		Health = randint(500, 800)
+		player1 = Ninja(Power, Health, Weapons, Expen, Oll, Name)
+	elif klass == "3":
+		Name = input("Как будут величать нашего персонажа?:")
+		Power = randint(50, 180)
+		Weapons = randint(60, 160)
+		Expen = randint(1, 3)
+		Oll = randint(4, 12)
+		Health = randint(500, 800)
+		player1 = Archer(Power, Health, Weapons, Expen, Oll, Name)
+	elif klass == "4":
+		Name = input("Как будут величать нашего персонажа?:")
+		Power = randint(100, 240)
+		Weapons = randint(70, 180)
+		Expen = randint(1, 3)
+		Oll = randint(3, 6)
+		Health = randint(400, 700)
+		player1 = Wizard(Power, Health, Weapons, Expen, Oll, Name)
+	else:
+		print(">>>Error<<<")
+	print("\n")
+	input()
+	print(">>>Создание второго персонажа<<<")
+	print("player2:")
+	klass1 = input('''К какому классу относится наш персонаж:
+1)Рыцарь
+2)Ниндзя
+3)Лучник
+4)Чародей
+''')
+	if klass1 == "1":
+		Name = input("Как будут величать нашего персонажа?:")
+		Power = randint(50, 200)
+		Weapons = randint(10, 100)
+		Expen = randint(10, 20)
+		Oll = randint(30, 60)
+		Health = randint(700, 1100)
+		player2 = Knight(Power, Health, Weapons, Expen, Oll, Name)
+	elif klass1 == "2":
+		Name = input("Как будут величать нашего персонажа?:")
+		Power = randint(70, 220)
+		Weapons = randint(30, 120)
+		Expen = randint(1, 3)
+		Oll = randint(3, 9)
+		Health = randint(500, 800)
+		player2 = Ninja(Power, Health, Weapons, Expen, Oll, Name)
+	elif klass1 == "3":
+		Name = input("Как будут величать нашего персонажа?:")
+		Power = randint(50, 180)
+		Weapons = randint(60, 160)
+		Expen = randint(1, 3)
+		Oll = randint(4, 12)
+		Health = randint(500, 800)
+		player2 = Archer(Power, Health, Weapons, Expen, Oll, Name)
+	elif klass1 == "4":
+		Name = input("Как будут величать нашего персонажа?:")
+		Power = randint(100, 240)
+		Weapons = randint(70, 180)
+		Expen = randint(1, 3)
+		Oll = randint(3, 6)
+		Health = randint(400, 700)
+		player2 = Wizard(Power, Health, Weapons, Expen, Oll, Name)
+	else:
+		print(">>>Error<<<")
+	print("\n")
+	input()
+	while True:
+		if player1.health <= 0:
+			print("Последние слова", player1.nickname)
+			player1.death()
+			break
+		elif player2.health <= 0:
+			print(player1.nickname, "убил", player2.nickname)
+			break
+		elif player2.health <= 0:
+			print("Последние слова", player2.nickname)
+			player2.death()
+			break
+		elif player1.health <= 0:
+			print(player2.nickname, "убил", player1.nickname)
+			break
+		else:
+			question2 = input(str(player2.nickname) + " будете использовать супер-атаку д\н: ")
+			if question2 == "д":
+				player2.attack1(player1)
+			else:
+				player2.attack2(player1)
+			input()
+			question1 = input(str(player1.nickname) + " будете использовать супер-атаку д\н: ")
+			if question1 == "д":
+				player1.attack1(player2)
+			else:
+				player1.attack2(player2)
+			input()
+			if player2.oll <= 0:
+				print(str(player2.nickname) + " у вас закончилась энергия(манна)\nТеперь вы не можете использовать супер-атаку")
+				player2.attack2(player1)
+
+			if player1.oll <= 0:
+				print(str(player1.nickname) + " у вас закончилась энергия(манна)\nТеперь вы не можете использовать супер-атаку")
+				player1.attack2(player2)
+
+game()
