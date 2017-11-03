@@ -1,0 +1,324 @@
+from random import randint, choice
+
+class Heroes:
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		self.oll = oll
+		self.expen = expen
+		self.health = health
+		self.power = power
+		self.nickname = nickname
+		self.weapons = weapons
+
+class Knight(Heroes):
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		super().__init__(power, health, weapons, expen, oll, nickname)
+	def attack1(self, target):
+		target.health -= (self.power + self.weapons)
+		self.oll -= self.expen
+		print(self.nickname, "ударил мечом по противнику с силой",\
+		(self.power + self.weapons))
+	def attack2(self, target):
+		target.health -= self.power
+		print(self.nickname, "ударил рукой соперника с силой", self.power)
+	def death(self):
+		print("Нееет...!!Я же забыл утюг выключить!!")
+
+class Ninja(Heroes):
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		super().__init__(power, health, weapons, expen, oll, nickname)
+	def attack1(self, target):
+		target.health -= (self.weapons * self.expen)
+		self.oll -= self.expen
+		print(self.nickname, "кинул в противника сюрикен и отнял",\
+		(self.weapons * self.expen), "урона")	
+	def attack2(self, target):
+		target.health -= (self.power + self.weapons)
+		print(self.nickname, "ударил катаной по противнику и нанес",\
+		(self.power + self.weapons), "урона")
+	def death(self):
+		print("没有...", self.nickname, "Совершил хара-кири")
+
+class Archer(Heroes):
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		super().__init__(power, health, weapons, expen, oll, nickname)
+	def attack1(self, target):
+		target.health -= ((self.weapons * self.expen) + self.power)
+		self.oll -= self.expen
+		print(self.nickname, "выстрелил из лука огненной стрелой и нанес",\
+		((self.weapons * self.expen) + self.power), "урона")
+	def attack2(self, target):
+		target.health -= self.weapons
+		print(self.nickname, "выстрелил из лука обычной стрелой и нанес",\
+		(self.weapons ), "урона")
+	def death(self):
+		print("Нееет...!!")
+
+class Wizard(Heroes):
+	def __init__(self, power, health, weapons, expen, oll, nickname):
+		super().__init__(power, health, weapons, expen, oll, nickname)
+	def attack1(self, target):
+		target.health -= (self.power + self.weapons)
+		self.oll -= (self.expen // 2)
+		print(self.nickname + " своим 'FeereeBaall!!!' нанес", (self.weapons + self.power), "урона",
+		"и потратил", (self.expen // 2), "манны")
+	def attack2(self, target):
+		target.health -= self.weapons
+		print(self.nickname + " призносит заклинание: 'Какашка судьбы!!' и наносит", self.weapons, "урона")	
+	def death(self):
+		print("Нееет...!!Ой всмысле Да! Маги не умерают!!")
+
+def rules():
+	print('''>>RULES<<
+1.Вам предлагают создать персонажа
+* Давать имя только буквами
+2.Вы выбираете будете ли использовать супер-атаку
+* Отвечаете на вопрос цифрами
+''')
+	input()
+	print('''>>КТО ПОБЕЖДАЕТ В ИГРЕ<<
+Правила просты побеждает тот кто остался в живых
+А проигрывает игрок если:
+1.У него заканчивается энергия
+* Энергия тратится на супер удары
+У рыцаря и колдуна по два супер удара
+1.2.У лучника же есть всего 6 стрел
+И если они закончатся вы проигрываете
+* Стрелы тратятся только на супер удары
+1.3.У ниндзи всего 4 сюрикена
+И если они закончатся вы проигрываете
+* Сюрикены тратятся только на супер-удары
+2.Игрок проигрывает если у него кончилось здоровье''')
+def stats(player):
+	print(player.nickname, "у вас осталось", player.health, "здоровья")
+	print(player.nickname, "у вас осталось", player.oll, "энергии")
+
+def game():
+	while True:
+		try:
+			Rules = int(input("Хотите прочитать правила 1/0?"))
+			if Rules == 1:
+				rules()
+			else:
+				print("Ммм так вы уже знакомы с нашей игрой\nЖелаем нарезать своего противника на куски и подать с сырно-кровяным соусом!")
+			input()
+			print(">>>Создание персонажа<<<")
+			print("player1:")
+			klass = int(input('''К какому классу относится наш персонаж:
+1)Рыцарь
+2)Ниндзя
+3)Лучник
+4)Чародей
+'''))
+			if klass == 1:
+				Name = str(input("Как будут величать нашего персонажа?:"))
+				Power = 100
+				Weapons = 50
+				Expen = 25
+				Oll = 50
+				Health = 1100
+				player1 = Knight(Power, Health, Weapons, Expen, Oll, Name)
+				print('''
+___________________
+| >>>PLAYER1<<<   |
+| POWER - 100     |
+| HEALTH - 1100   |
+| WAPONS - SWORD  |
+| SWORD - 50      |
+| SUPER_PUNCH - 2 |
+|_________________|
+''')
+		
+			elif klass == 2:
+				Name = str(input("Как будут величать нашего персонажа?: "))
+				Power = 100
+				Weapons = 70
+				Expen = int(input("Сколько сюрикенов вы хотите бросать за раз?\nНо помните у вас всего 4 сюрикена: "))
+				Oll = 4
+				Health = 900
+				player1 = Ninja(Power, Health, Weapons, Expen, Oll, Name)
+				print('''
+___________________
+| >>>PLAYER1<<<   |
+| POWER - 100     |
+| HEALTH - 900    |
+| WAPONS - KATANA |
+| KATANA - 70     |
+|_________________|
+''')
+
+			elif klass == 3:
+				Name = str(input("Как будут величать нашего персонажа?:"))
+				Power = 150
+				Weapons = 70
+				Expen = int(input("Сколько стрел вы хотите выстреливать за раз?\nНо помните у вас всего 6 стрел: "))
+				Oll = 6
+				Health = 600
+				player1 = Archer(Power, Health, Weapons, Expen, Oll, Name)
+				print('''
+___________________
+| >>>PLAYER1<<<   |
+| POWER - 150     |
+| HEALTH - 70     |
+| WAPONS - BOW    |
+| ARROW - 70      |
+|_________________|
+''')
+
+			elif klass == 4:
+				Name = str(input("Как будут величать нашего персонажа?:"))
+				Power = 100
+				Weapons = 100
+				Expen = 1
+				Oll = 3
+				Health = 700
+				player1 = Wizard(Power, Health, Weapons, Expen, Oll, Name)
+				print('''
+___________________
+| >>>PLAYER1<<<   |
+| POWER - 100     |
+| HEALTH - 700    |
+| WAPONS - MAGIC  |
+| MAGIC - 100     |
+| SUPER_PUNCH - 3 |
+|_________________|
+''')
+			print(">>>Создание второго персонажа<<<")
+			print("player2:")
+			klass1 = int(input('''К какому классу относится наш персонаж:
+1)Рыцарь
+2)Ниндзя
+3)Лучник
+4)Чародей
+'''))
+			if klass1 == 1:
+				Name = str(input("Как будут величать нашего персонажа?: "))
+				Power = 100
+				Weapons = 50
+				Expen = 25
+				Oll = 50
+				Health = 1100
+				player2 = Knight(Power, Health, Weapons, Expen, Oll, Name)
+				print('''
+___________________
+| >>>PLAYER2<<<   |
+| POWER - 100     |
+| HEALTH - 1100   |
+| WAPONS - SWORD  |
+| SWORD - 50      |
+| SUPER_PUNCH - 2 |
+|_________________|
+''')
+			elif klass1 == 2:
+				Name = str(input("Как будут величать нашего персонажа?: "))
+				Power = 100
+				Weapons = 70
+				Expen = int(input("Сколько сюрикенов вы хотите бросать за раз?\nНо помните у вас всего 4 сюрикена: "))
+				Oll = 4
+				Health = 900
+				player2 = Ninja(Power, Health, Weapons, Expen, Oll, Name)
+				print('''
+___________________
+| >>>PLAYER2<<<   |
+| POWER - 100     |
+| HEALTH - 900    |
+| WAPONS - KATANA |
+| KATANA - 70     |
+|_________________|
+''')
+			elif klass1 == 3:
+				Name = str(input("Как будут величать нашего персонажа?:"))
+				Power = 150
+				Weapons = 70
+				Expen = int(input("Сколько стрел вы хотите выстреливать за раз?\nНо помните у вас всего 6 стрел: "))
+				Oll = 6
+				Health = 600
+				player2 = Archer(Power, Health, Weapons, Expen, Oll, Name)
+				print('''
+___________________
+| >>>PLAYER2<<<   |
+| POWER - 150     |
+| HEALTH - 70     |
+| WAPONS - BOW    |
+| ARROW - 70      |
+|_________________|
+''')
+			elif klass1 == 4:
+				Name = str(input("Как будут величать нашего персонажа?:"))
+				Power = 100
+				Weapons = 100
+				Expen = 1
+				Oll = 3
+				Health = 700
+				player2 = Wizard(Power, Health, Weapons, Expen, Oll, Name)
+				print('''
+___________________
+| >>>PLAYER2<<<   |
+| POWER - 100     |
+| HEALTH - 700    |
+| WAPONS - MAGIC  |
+| MAGIC - 100     |
+| SUPER_PUNCH - 3 |
+|_________________|
+''')
+			while True:
+				if player1.health <= 0:
+					print("Последние слова", player1.nickname)
+					player1.death()
+					break
+				elif player2.health <= 0:
+					print(player1.nickname, "убил", player2.nickname)
+					break
+				elif player2.health <= 0:
+					print("Последние слова", player2.nickname)
+					player2.death()
+					break
+				elif player1.health <= 0:
+					print(player2.nickname, "убил", player1.nickname)
+					break
+				else:
+					question2 = int(input(str(player2.nickname) + " будете использовать супер-атаку 1/0: "))
+					if question2 == 1:
+						player2.attack1(player1)
+						stats(player1)
+						input()
+					else:
+						player2.attack2(player1)
+						stats(player1)
+						input()
+					question1 = int(input(str(player1.nickname) + " будете использовать супер-атаку 1/0: "))
+					if question1 == 1:
+						player1.attack1(player2)
+						stats(player2)
+						input()
+					else:
+						player1.attack2(player2)
+						stats(player2)
+						input()
+					if player2.oll < 0:
+						print(str(player2.nickname) + " у вас закончилась энергия(манна)\nВозможно вы не корректно использовали супер-атаки\nВы проиграли!")
+						break
+
+					if player1.oll < 0:
+						print(str(player1.nickname) + " у вас закончилась энергия(манна)\nВозможно вы не корректно использовали супер-атаки\nВы проиграли!")
+						break
+			if player1.health <= 0:
+				break
+			elif player2.health <= 0:
+				break
+			elif player2.health <= 0:
+				break
+			elif player1.health <= 0:
+				break
+			if player2.oll < 0:
+				break
+			if player1.oll < 0:
+				break
+
+		except ValueError:
+			print("На вопросы отвечать цифрами!")
+			print("А имя писать только буквами!")
+		finally:
+			print("Попробуй еще раз!")
+game()
+
+
