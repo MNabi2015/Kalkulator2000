@@ -1,0 +1,406 @@
+class Users:
+	def __init__(self, login, password):
+		self.login = login
+		self.password = password
+	def sign_in(self, users_list):
+		if (self.login in users_list) and (self.password in users_list):
+			print("___________________________________")
+			print("|Такой пользователь уже существует|")
+			print("|:( :( :( :( :( :(  :( :( :( :( :(|")
+			print("|---------------------------------|")
+		else:
+			users_list[self.login] = self.password
+			print("___________________________________")
+			print("| Вы успешно зарегестрировались ! |")
+			print("|:) :) :) :) :) :)  :) :) :) :) :)|")
+			print("|---------------------------------|")
+	def sign_up(self, users_list):
+		if (self.login in users_list) and (self.password in users_list):
+			print("___________________________________")
+			print("|   Вы успешно авторизовались !   |")
+			print("|:) :) :) :) :) :)  :) :) :) :) :)|")
+			print("|---------------------------------|")
+		else:
+			print("___________________________________")
+			print("|Такого пользователя не существует|")
+			print("|:( :( :( :( :( :(  :( :( :( :( :(|")
+			print("|---------------------------------|")
+
+class Elect:
+	def __init__(self, price, firm, rating, model, tipe):
+		self.price = price
+		self.firm = firm
+		self.rating = rating
+		self.model = model
+		self.tipe = tipe
+
+class Appliances(Elect):
+	def __init__(self, price, firm, rating, model, power, tipe):
+		super().__init__(price, firm, rating, model, tipe)
+		self.power = power
+	def purchase(self):
+		print(self.tipe, self.firm, self.model, "\nМощность:", self.power,
+		"\nОценка:", self.rating + "/10", "\nЦена: ", self.price)
+	def name(self):
+		print(self.tipe, self.firm, self.model)
+
+class Smartphone(Elect):
+	def __init__(self, price, rating, firm, model, OS, tipe):
+		super().__init__(price, firm, rating, model, tipe)
+		self.OS = OS
+	def purchase(self):
+		print(self.tipe, self.firm, self.model, "\nОперационная система:", self.OS,
+		"\nОценка:", self.rating + "/10", "\nЦена: ", self.price)
+	def name(self):
+		print(self.tipe, self.firm, self.model)
+
+class Accessories(Elect):
+	def __init__(self, price, rating, firm, model, tipe, category):
+		super().__init__(price, firm, rating, model, tipe)
+		self.category = category
+	def purchase(self):
+		print(self.category, self.tipe, self.firm, self.model,
+		"\nОценка:", self.rating + "/10", "\nЦена: ", self.price)
+	def name(self):
+		print(self.category, self.tipe, self.firm, self.model)
+
+class PC(Elect):
+	def __init__(self, price, firm, rating, model, tipe, category, OS):
+		super().__init__(price, firm, rating, model, tipe)
+		self.category = category
+		self.OS = OS
+	def purchase(self):
+		print(self.category, self.tipe, self.firm, self.model, "\nОперационная система:", self.OS,
+		"\nОценка:", self.rating + "/10", "\nЦена: ", self.price)
+	def name(self):
+		print(self.category, self.tipe, self.firm, self.model)
+
+class Monitors(Elect):
+	def __init__(self, price, firm, rating, model, tipe, resolution):
+		super().__init__(price, firm, rating, model, tipe)
+		self.resolution = resolution
+	def purchase(self):
+		print(self.tipe, self.firm, self.model, "\nРазрешение экрана:", self.resolution,
+		"\nОценка:", self.rating + "/10", "\nЦена: ", self.price)
+
+#L - LG, S - samsung ...
+
+#WM - washing mashine
+LWM = Appliances(29990, "LG", "7", "F12U1", "1700Bт", "Стиральная машина")
+SWM = Appliances(24990, "Samsung", "9", "WW80K", "2400Bт", "Стиральная машина")
+BWM = Appliances(19990, "Bosch Serie", "8", "WLG2", "2100Bт", "Стиральная машина")
+
+#VC - vacuum cleaner
+LVC = Appliances(4990, "LG", "8", "VC53", "340Bт", "Пылесос")
+SVC = Appliances(7990, "Samsung", "9", "SC18M", "380Bт", "Пылесос")
+BVC = Appliances(8990, "Bosch", "10", "WKG80U", "400Bт", "Пылесос")
+
+#EI - electrick iron
+TEI = Appliances(2990, "Tefal", "7", "GH80I", "1700Bт", "Утюг")
+PEI = Appliances(4990, "Philips", "9", "HUI40", "2400Bт", "Утюг")
+BEI = Appliances(6990, "Bosch", "8", "JKNWU", "2100Bт", "Утюг")
+
+#L - laptop
+AGL = PC(60990, "ASUS", "9", "ROG 24XU6","Ноутбук", "Игровой", "Windows")
+MGL = PC(50990, "MSI", "8", "GP62M7R", "Ноутбук", "Игровой", "Windows")
+LGL = PC(99990, "Lenovo", "10", "Legion Y720", "Ноутбук", "Игровой", "Windows")
+
+AUL = PC(90990, "Apple", "9", "MackBook Air13","Ноутбук", "Тонкий", "MacOS")
+XUL = PC(50990, "Xiaomi", "9", "MiBook Air13", "Ноутбук", "", "Windows")
+LUL = PC(70990, "Lenovo", "7", "Yoga G34", "Ноутбук", "", "Windows")
+
+ABL = PC(24990, "ASUS", "7", "GHU50","Ноутбук", "Бюджетный", "Windows")
+DBL = PC(29990, "Dell", "5", "Inspiron 343 - 655", "Ноутбук", "Бюджетный", "Windows")
+HBL = PC(29990, "HP", "8", "BIR666", "Ноутбук", "Бюджетный", "Windows")
+
+#SP - smartphone
+ASP = Smartphone(69990, "9", "Apple", "Iphone 8+", "Ios", "Смартфон")
+SSP = Smartphone(59990, "7", "Samsung", "Galaxy s8", "Android", "Смартфон")
+MSP = Smartphone(49990, "9", "Meizu", "Pro 7", "Android", "Смартфон")
+
+
+def store():
+	product_list = []
+	choice_purchase = int(input('''
+_______________________
+| 1.Бытова техника!   |
+| 2.Техника для кухни |
+| 3.Ноутбуки!         |
+| 4.Компьютеры        |
+| 5.Мониторы          |
+| 6.Телевизоры        |
+| 7.Смартфоны!        |
+| 8.Планшеты          |
+| 9.Аксесуары         |
+| 10.Переферийные     |
+|     устройства      |
+|_____________________|
+|Ваш выбор:'''))
+	if choice_purchase == 1:
+		choice_purchase1 = int(input('''
+_______________________
+| 1.Стиральные машины |
+| 2.Пылесосы          |
+| 3.Утюги             |
+|_____________________|
+|Ваш выбор:'''))
+		if choice_purchase1 == 1:
+			choice_purchase2 = int(input('''
+________________________
+| 1.LG --- 29990р      |
+| 2.Samsung --- 24990p |
+| 3.Bosch --- 19990p   |
+|______________________|
+|Ваш выбор:'''))
+			if choice_purchase2 == 1:
+				LWM.purchase()
+				basket_add(product_list, LWM.name())
+			elif choice_purchase2 == 2:
+				SWM.purchase()
+				basket_add(product_list, SWM.name())
+			elif choice_purchase2 == 3:
+				BWM.purchase()
+				basket_add(product_list, BWM.name())
+			else:
+				print(">>> 404 Error <<<")
+
+		elif choice_purchase1 == 2:
+			choice_purchase2 = int(input('''
+________________________
+| 1.LG --- 4990р       |
+| 2.Samsung --- 7990p  |
+| 3.Bosch --- 8990p    |
+|______________________|
+|Ваш выбор:'''))
+			if choice_purchase2 == 1:
+				LVC.purchase()
+				basket_add(product_list, LVC.name())
+			elif choice_purchase2 == 2:
+				SVC.purchase()
+				basket_add(product_list, SVC.name())
+			elif choice_purchase2 == 3:
+				BVC.purchase()
+				basket_add(product_list, BVC.name())
+			else:
+				print(">>> 404 Error <<<")
+
+		elif choice_purchase1 == 3:
+			choice_purchase2 = int(input('''
+________________________
+| 1.Tefal --- 2990р    |
+| 2.Philips --- 4990p  |
+| 3.Bosch --- 6990p    |
+|______________________|
+|Ваш выбор:'''))
+			if choice_purchase2 == 1:
+				TEI.purchase()
+				basket_add(product_list, TEI.name())
+			elif choice_purchase2 == 2:
+				PEI.purchase()
+				basket_add(product_list, PEI.name())
+			elif choice_purchase2 == 3:
+				BEI.purchase()
+				basket_add(product_list, BEI.name())
+			else:
+				print(">>> 404 Error <<<")
+
+	elif choice_purchase == 3:
+		choice_purchase1 = int(input('''
+______________________
+| 1.Игровой сигмент  |
+| 2.Ультробуки       |
+| 3.Бюджетный сигмент|
+|____________________|
+|Ваш выбор:'''))
+		if choice_purchase1 == 1:
+			choice_purchase2 = int(input('''
+________________________
+| 1.ASUS --- 60 990p   |
+| 2.MSI --- 50 990p    |
+| 3.Lenovo --- 99 990p |
+|______________________|
+|Ваш выбор:'''))
+			if choice_purchase2 == 1:
+				AGL.purchase()
+				basket_add(product_list, AGL.name())
+			elif choice_purchase2 == 2:
+				MGL.purchase()
+				basket_add(product_list, MGL.name())
+			elif choice_purchase2 == 3:
+				LGL.purchase()
+				basket_add(product_list, LGL.name())
+			else:
+				print(">>> 404 Error <<<")
+
+		elif choice_purchase1 == 2:
+			choice_purchase2 = int(input('''
+________________________
+| 1.Xiaomi --- 50 990p |
+| 2.Apple --- 90 990p  |
+| 3.Lenovo --- 70 990p |
+|______________________|
+|Ваш выбор:'''))
+			if choice_purchase2 == 1:
+				XUL.purchase()
+				basket_add(product_list, XUL.name())
+			elif choice_purchase2 == 2:
+				AUL.purchase()
+				basket_add(product_list, AUL.name())
+			elif choice_purchase2 == 3:
+				LUL.purchase()
+				basket_add(product_list, LUL.name())
+			else:
+				print(">>> 404 Error <<<")
+
+		elif choice_purchase1 == 3:
+			choice_purchase2 = int(input('''
+________________________
+| 1.HP --- 19 990p     |
+| 2.Asus --- 24 990p   |
+| 3.Dell --- 29 990p   |
+|______________________|
+|Ваш выбор:'''))
+			if choice_purchase2 == 1:
+				HBL.purchase()
+				basket_add(product_list, HBL.name())
+			elif choice_purchase2 == 2:
+				ABL.purchase()
+				basket_add(product_list, ABL.name())
+			elif choice_purchase2 == 3:
+				DBL.purchase()
+				basket_add(product_list, DBL.name())
+			else:
+				print(">>> 404 Error <<<")
+	elif choice_purchase == 7:
+			choice_purchase1 = int(input('''
+________________________
+| 1.Samsung --- 59 990p|
+| 2.Apple --- 69 990p  |
+| 3.Meizu --- 49 990p  |
+|______________________|
+|Ваш выбор:'''))
+			if choice_purchase1 == 1:
+				SSP.purchase()
+				basket_add(product_list, SSP.name())
+			elif choice_purchase1 == 2:
+				ASP.purchase()
+				basket_add(product_list, ASP.name())
+			elif choice_purchase1 == 3:
+				MSP.purchase()
+				basket_add(product_list, MSP.name())
+			else:
+				print(">>> 404 Error <<<")
+
+
+	options = int(input('''
+	1. Открыть корзину
+	2. Продолжить покупки
+	Ваш выбор'''))
+	if options == 1:
+		print(product_list)
+		option = int(input('''
+	_____________________________
+	| 1.Оформить заказ          |
+	| 2.Очистить корзину        |
+	| 3.Удалить товар           |
+	| 4.Выйти из корзины        |
+	|___________________________|
+	'''))
+		if option == 1:
+			country = input("\nВ какой стране вы живете? :")
+			sity = input("\nВ каком городе вы проживаете? :")
+			index = input("\nУкажите свой почтовый индекс :")
+			print("Товар отправлен почтой россии по адресу:\n" + country, sity, "\nИндекс: " + index)
+			print("Он прейдет через 10 лет или не прейдет вообще")
+			print("*** Спасибо за покупку! ***")
+		elif option == 2:
+			product_list.clear()
+			print("*** Корзина очищена ***")
+		elif option == 3:
+			print('''
+	    >>>RULES<<<
+	Давать полное имя товару
+	Пример: Смартфон Samsung Galaxy s8
+	''')	
+			product = input("Введите товар который хотите удалить: ")
+			product_list.remove(product)
+		else:
+			print("_________")
+			print("|  404  |")
+			print("| Error |")
+			print("|-------|")
+
+def basket_add(product_list, product):
+	option = int(input('''
+_____________________________
+| 1.Добавить товар в корзину|
+| 2.Отмена                  |
+|___________________________|
+'''))
+	if option == 1:
+		product_list.append(product)
+		print("*** Товар добавлен в корзину ***")
+	else:
+		print("_________")
+		print("|  404  |")
+		print("| Error |")
+		print("|-------|")
+
+
+def account(users_list):
+	exit = False
+	print("_____________________")
+	choice = int(input(
+"|1.Войти             |\n\
+|2.Зарегистрироваться|\n\
+|3.Дальше            |\n\
+|4.Удалить_аккаунт   |\n\
+|--------------------|\n"))
+	if choice == 1:
+		user = Users(input('Введите логин:'), input('Введите пароль:'))
+		user.sign_up(users_list)
+	elif choice == 2:
+		user = Users(input('Введите логин:'), input('Введите пароль:'))
+		user.sign_in(users_lists)
+	elif choice == 3:
+		f = open("Users.txt" , "a")
+		for i in users_lists.keys():
+			f.write(i + " : " + users_lists[i] + "\n")
+		exit = True
+		f.close()
+	elif choice == 4:
+		print("Эта функция на доработке")
+	else:
+		print("_________")
+		print("|  404  |")
+		print("| Error |")
+		print("|-------|")
+	return exit
+
+users_lists = {}
+print("|ДОБРО ПОЖАЛОВАТЬ В МАГАЗИН ЭЛЕКТРОНИКИ|")
+print("|______________________________________|")
+while True:
+	f = open("Users.txt")
+	users_list1 = f.read()
+	i = account(users_list1)
+	f.close()
+	if i == 1:
+		break
+while True:
+	store()
+	choise = int(input('''
+________________________
+| 1.Выйти из магазина  |
+| 2.Отмена             |
+|______________________|
+|Ваш выбор:'''))
+	if choise == 1:
+		print('''
+___________________________
+| *** Дсвидания! ****     |
+| Надеюсь вам             |
+| понравился наш магазин  |
+|_________________________|
+''')
+		break
